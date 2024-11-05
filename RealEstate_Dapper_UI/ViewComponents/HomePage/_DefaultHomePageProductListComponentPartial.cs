@@ -20,7 +20,7 @@ namespace RealEstate_Dapper_UI.ViewComponents.HomePage
             if(responsseMessage.IsSuccessStatusCode)  
             {  
                 var jsondata=await responsseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<List<ResultProdctDtos>>(jsondata); 
+                var values = JsonConvert.DeserializeObject<List<ResultProdctDto>>(jsondata); 
                 return View(values);
             }
             return View();

@@ -8,5 +8,6 @@
         public string ProductCity { get; set; }
         public string ProductDistrict { get; set; }
         public int ProductCategory { get; set; }
+        public bool DealOfTheDay { get; set; }
     }
 }
