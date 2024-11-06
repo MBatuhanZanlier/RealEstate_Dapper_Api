@@ -2,8 +2,8 @@
 {
     public class GetCheckAppUserViewModel
     {
-        public  int  ıd { get; set; }
-        public string Usurname { get; set; }
+        public  int  id { get; set; }
+        public string UsurName { get; set; }
         public string Role { get; set; }
         public bool IsExist { get; set; }
     }

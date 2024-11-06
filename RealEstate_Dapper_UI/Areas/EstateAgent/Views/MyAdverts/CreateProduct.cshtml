@@ -1,0 +1,44 @@
+﻿@model CreatePrdocutDto
+@{
+    ViewData["Title"] = "CreateProduct";
+    Layout = "~/Areas/EstateAgent/Views/_LayoutEstateAgent/Index.cshtml";
+}
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+        <div class="col-12">
+            <div class="bg-light rounded h-100 p-4">
+                <form method="post">
+                    <label>İlan Başlığı</label>
+                    <input type="text" asp-for="ProductTitle" class="form-control" />
+
+                    <label>Şehir</label>
+                    <input type="text" asp-for="ProductCity" class="form-control" />
+
+                    <label>İlçe</label>
+                    <input type="text" asp-for="ProductDistrict" class="form-control" />
+                    <br />
+                    <label>Kategori</label>
+                    @Html.DropDownListFor(x => x.ProductCategory, (List<SelectListItem>)ViewBag.v, new { @class = "form-control" })
+                    <br />
+                    <label>Fiyat</label>
+                    <input type="text" asp-for="ProductPrice" class="form-control" />
+                    <br />
+                    <label>Kapak Fotoğrafı</label>
+                    <input type="text" asp-for="ProductCoverImage" class="form-control" />
+                    <br />
+                    <label>Tür</label>
+                    <input type="text" asp-for="Type" class="form-control" />
+                    <br />
+                    <label>İlan Açık Adresi</label>
+                    <textarea asp-for="ProductAddress" class="form-control" rows="5">   </textarea>
+                    <br />
+                    <label>İlan Açıklaması</label>
+                    <textarea asp-for="ProductDescription" class="form-control" rows="5">   </textarea>
+                    <br />
+                    <button class="btn btn-primary">İlanı Oluştur</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
