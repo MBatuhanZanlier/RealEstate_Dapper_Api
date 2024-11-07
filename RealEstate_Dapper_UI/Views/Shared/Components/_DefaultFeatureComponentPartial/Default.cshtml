@@ -1,4 +1,4 @@
-﻿
+﻿@model List<ResultCategoryDto>
 <section class="w3l-cover-3">
     <div class="cover top-bottom">
         <div class="container">
@@ -14,28 +14,25 @@
                             <li><a href="#link">Private house</a></li>
                         </ul>
                     </div>
-                    <form action="#" class="w3l-cover-3-gd" method="GET">
-                        <input type="search" name="text" placeholder="Anahtar Kelimeyi Girin" required>
+                    <form asp-action="PropertyListWithSearch" asp-controller="Property" class="w3l-cover-3-gd" method="post">
+                        <input type="search" name="searchKeyValue" placeholder="Anahtar Kelimeyi Girin" required>
                         <span class="input-group-btn">
-                            <select class="btn btn-default" name="ext" required>
+                            <select class="btn btn-default" name="propertyCategoryıd" required>
                                 <option selected="">Office</option>
-                                <option>Villa</option>
-                                <option>Apartment</option>
-                                <option>Private house</option>
-                                <option>Building</option>
-                                <option>Shop</option>
-                                <option>Social housing</option>
-                                <option>Town house</option>
+                                @foreach (var item in Model)
+                                {
+                                    <option value="@item.CategoryID">@item.CategoryName</option>
+                                }
                             </select>
                         </span>
                         <span class="input-group-btn">
-                            <select class="btn btn-default" name="ext" required>
+                            <select class="btn btn-default" name="city" required>
                                 <option selected="">Ülke Seçiniz</option>
-                                <option>Australia</option>
-                                <option>London</option>
-                                <option>India</option>
-                                <option>Bangladesh</option>
-                                <option>Saudi Arabia</option>
+                                <option>Balıkkesir</option>
+                                <option>Ankara</option>
+                                <option>İzmir</option>
+                                <option>Kayseri</option>
+                                <option>Bursa</option>
                                 <option>America</option>
                                 <option>Srilanka</option>
                             </select>
