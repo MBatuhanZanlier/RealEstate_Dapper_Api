@@ -41,9 +41,10 @@ namespace RealEstate_Dapper_UI.Controllers
             }
             return View();
         }
-        [HttpGet]
-        public async Task<IActionResult> PropertySingle(int id)
+        [HttpGet("property/{slug}/{id}")]
+        public async Task<IActionResult> PropertySingle(string slug,int id)
         {
+            ViewBag.i = id;
             var client = _httpClientFactory.CreateClient();
             var responsseMessage = await client.GetAsync("https://localhost:44307/api/Products/GetProductByProductıd?id=2");
             var jsondata = await responsseMessage.Content.ReadAsStringAsync();
@@ -63,6 +64,7 @@ namespace RealEstate_Dapper_UI.Controllers
             ViewBag.addres = values.ProductAddress;
             ViewBag.type = values.Type;
             ViewBag.description = values.ProductDescription;
+            ViewBag.slugUrl = values.SlugUrl;
 
             ViewBag.size = values1.ProductDetailSize;
             ViewBag.roomcount = values1.ProductDetailRoomCount;
@@ -81,11 +83,25 @@ namespace RealEstate_Dapper_UI.Controllers
             TimeSpan timespan = date1 - date2;
             int month = timespan.Days;
 
-            ViewBag.datediff = 30 / month;
+            ViewBag.datediff = 30 / month; 
+
+            string slugFromTitle=CreateSlug(values.ProductTitle);
+            ViewBag.slugUrl = slugFromTitle;
 
             return View();
 
 
+        }
+
+        private string CreateSlug(string title)
+        {
+            title = title.ToLowerInvariant(); // Küçük harfe çevir
+            title = title.Replace(" ", "-"); // Boşlukları tire ile değiştir
+            title = System.Text.RegularExpressions.Regex.Replace(title, @"[^a-z0-9\s-]", ""); // Geçersiz karakterleri kaldır
+            title = System.Text.RegularExpressions.Regex.Replace(title, @"\s+", " ").Trim(); // Birden fazla boşluğu tek boşluğa indir ve kenar boşluklarını kaldır
+            title = System.Text.RegularExpressions.Regex.Replace(title, @"\s", "-"); // Boşlukları tire ile değiştir
+
+            return title;
         }
     }
 }

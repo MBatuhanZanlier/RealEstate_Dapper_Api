@@ -13,7 +13,7 @@ namespace RealEstate_Dapper_Api.Repositories.PopularLocationRepository
             _context = context;
         }
 
-        public async void CreatePopularLocationAsync(CreatePopularLocationDto popularLocation)
+        public async Task CreatePopularLocationAsync(CreatePopularLocationDto popularLocation)
         {
             string query = "insert into PopularLocation (CityName,ImageUrl) values (@cityname,@ımageurl)";
             var parematers = new DynamicParameters();
@@ -24,7 +24,7 @@ namespace RealEstate_Dapper_Api.Repositories.PopularLocationRepository
                 await connection.ExecuteAsync(query, parematers);
             }
         }
-        public async void DeletePopularLocationAsync(int id)
+        public async Task DeletePopularLocationAsync(int id)
         {
             string query = "Delete From PopularLocation Where PopularLocationID=@popularlocationID"; 
             var parematers = new DynamicParameters();
@@ -58,7 +58,7 @@ namespace RealEstate_Dapper_Api.Repositories.PopularLocationRepository
             }
         }
 
-        public async void UpdatePopularLocationAsync(UpdatePopularLocationDto popularLocation)
+        public async Task UpdatePopularLocationAsync(UpdatePopularLocationDto popularLocation)
         {
             string query = "Update PopularLocation Set CityName=@cityname,ImageUrl=@ımageurl Where PopularLocationID=@popularlocationID";
             var parematers = new DynamicParameters();

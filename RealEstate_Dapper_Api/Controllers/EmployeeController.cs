@@ -8,7 +8,7 @@ namespace RealEstate_Dapper_Api.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class EmployeeController : ControllerBase
-    { 
+    {
         private readonly IEmployeeRepository _employeeRepository;
 
         public EmployeeController(IEmployeeRepository employeeRepository)
@@ -16,34 +16,34 @@ namespace RealEstate_Dapper_Api.Controllers
             _employeeRepository = employeeRepository;
         }
 
-        [HttpGet] 
+        [HttpGet]
         public async Task<IActionResult> EmployeeList()
         {
-            var values= await _employeeRepository.GetAllEmployeeAsync(); 
-            return Ok(values);  
+            var values = await _employeeRepository.GetAllEmployeeAsync();
+            return Ok(values);
         }
-        [HttpPost] 
+        [HttpPost]
         public async Task<IActionResult> CreateEmploye(CreateEmployeeDto createEmployeeDto)
         {
-           _employeeRepository.CreateEmployeeAsync(createEmployeeDto);
+            await _employeeRepository.CreateEmployeeAsync(createEmployeeDto);
             return Ok("Başarıyla Eklendi");
         }
-        [HttpDelete("{id}")] 
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteEmployee(int id)
         {
-            _employeeRepository.DeleteEmployeeAsync(id);
+            await _employeeRepository.DeleteEmployeeAsync(id);
             return Ok("Başarıyla Silindi");
         }
-        [HttpPut] 
+        [HttpPut]
         public async Task<IActionResult> UpdateEmployee(UpdateEmployeeDto updateEmployeeDto)
         {
-          _employeeRepository.UpdateEmployeeAsync(updateEmployeeDto);
-            return Ok("Başarıyla Güncellendi"); 
+            await _employeeRepository.UpdateEmployeeAsync(updateEmployeeDto);
+            return Ok("Başarıyla Güncellendi");
         }
-        [HttpGet("{id}")] 
-        public async Task<IActionResult>  GetByıdEmployee(int id)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetByıdEmployee(int id)
         {
-            var values= await _employeeRepository.GetbyIdEmployeeAsync(id); 
+            var values = await _employeeRepository.GetbyIdEmployeeAsync(id);
             return Ok(values);
         }
     }

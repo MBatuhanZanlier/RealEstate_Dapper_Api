@@ -14,7 +14,7 @@ namespace RealEstate_Dapper_Api.Repositories.WhoWeAreDetaiRepository
             _context = context;
         }
 
-        public async void CreateWhoWeAreDetailAsync(CreateWhoWeAreDetailDto createWhoWeAreDetailDto)
+        public async Task CreateWhoWeAreDetailAsync(CreateWhoWeAreDetailDto createWhoWeAreDetailDto)
         {
             string query = "insert into WhoWeAreDetail(Title,Subtitle,Description1,Description2) values (@title,@subTitle,@description1,@description2)";
             var paramerts = new DynamicParameters();
@@ -28,7 +28,7 @@ namespace RealEstate_Dapper_Api.Repositories.WhoWeAreDetaiRepository
             }
         }
 
-        public async void DeleteWhoWeAreDetailAsync(int id)
+        public async Task DeleteWhoWeAreDetailAsync(int id)
         {
             string query = "Delete From WhoWeAreDetail Where  WhoWeAreDetailID=@whoWeAreDetailID";
             var paramerts = new DynamicParameters();
@@ -64,7 +64,7 @@ namespace RealEstate_Dapper_Api.Repositories.WhoWeAreDetaiRepository
             }
         }
 
-        public async void UpdateWhoWeAreDetailAsync(UpdateWhoWeAreDetailDto updateWhoWeAreDetailDto)
+        public async Task UpdateWhoWeAreDetailAsync(UpdateWhoWeAreDetailDto updateWhoWeAreDetailDto)
         {
             string query = "Update WhoWeAreDetail Set Title=@title,Subtitle=@subTitle,Description1=@description1,Description2=@description2 where WhoWeAreDetailID=@whoWeAreDetailID";
             var paramerts = new DynamicParameters();

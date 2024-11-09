@@ -13,12 +13,12 @@ namespace RealEstate_Dapper_Api.Repositories.ToDoListRepositories
             _context = context;
         }
 
-        public void CreateToDoListAsync(CreateToDoListDto dto)
+        public Task CreateToDoListAsync(CreateToDoListDto dto)
         {
             throw new NotImplementedException();
         }
 
-        public void DeleteToDoListAsync(int id)
+        public Task DeleteToDoListAsync(int id)
         {
             throw new NotImplementedException();
         }
@@ -33,7 +33,7 @@ namespace RealEstate_Dapper_Api.Repositories.ToDoListRepositories
             }
         }
 
-        public void UpdateToDoListAsync(UpdateToDoList updateToDoList)
+        public Task UpdateToDoListAsync(UpdateToDoList updateToDoList)
         {
             throw new NotImplementedException();
         }

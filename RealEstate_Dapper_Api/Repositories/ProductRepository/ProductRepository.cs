@@ -25,7 +25,7 @@ namespace RealEstate_Dapper_Api.Repositories.ProductRepository
         }
         public async Task<List<ResultProductProductWithCategoryDto>> GetAllProductWithCategoryAsync()
         {
-            string query = "Select ProductID,ProductTitle,ProductCity,ProductDistrict,CategoryName,ProductCoverImage,Type,ProductAddress,DealOfTheDay From Product inner join Category on Product.ProductCategory=Category.CategoryID";
+            string query = "Select ProductID,ProductTitle,ProductCity,ProductDistrict,CategoryName,ProductCoverImage,Type,ProductAddress,DealOfTheDay,ProductPrice,SlugUrl From Product inner join Category on Product.ProductCategory=Category.CategoryID";
             using (var connection = _context.CreateConnection())
             {
                 var values = await connection.QueryAsync<ResultProductProductWithCategoryDto>(query);
@@ -70,7 +70,7 @@ namespace RealEstate_Dapper_Api.Repositories.ProductRepository
             }
         }
 
-        public async void ProductDealOfTheDayStatusChangeToFalse(int id)
+        public async Task ProductDealOfTheDayStatusChangeToFalse(int id)
         {
             string query = "Update Product Set DealOfTheDay=0 where ProductID=@productıd";
             var parameters = new DynamicParameters();
@@ -81,7 +81,7 @@ namespace RealEstate_Dapper_Api.Repositories.ProductRepository
             }
         }
 
-        public async void ProductDealOfTheDayStatusChangeToTrue(int id)
+        public async Task ProductDealOfTheDayStatusChangeToTrue(int id)
         {
             string query = "Update Product Set DealOfTheDay=1 where ProductID=@productıd";
             var parameters = new DynamicParameters();
@@ -117,7 +117,7 @@ namespace RealEstate_Dapper_Api.Repositories.ProductRepository
 
         public async Task<ResultGetProductDetailIdDto> GetProductDetailIdAsync(int id)
         {
-            string query = "Select ProductID,ProductTitle,ProductCity,ProductDistrict,CategoryName,ProductCoverImage,Type,ProductAddress,DealOfTheDay,ProductStatus,AdvertisementDate,ProductDescription From Product inner join Category on Product.ProductCategory=Category.CategoryID where ProductID=@productıd";
+            string query = "Select ProductID,ProductTitle,ProductCity,ProductDistrict,CategoryName,ProductCoverImage,Type,ProductAddress,DealOfTheDay,ProductStatus,AdvertisementDate,ProductDescription,SlugUrl From Product inner join Category on Product.ProductCategory=Category.CategoryID where ProductID=@productıd";
             var parameters = new DynamicParameters();
             parameters.Add("@productıd", id);
             using (var connection = _context.CreateConnection())
@@ -156,10 +156,21 @@ namespace RealEstate_Dapper_Api.Repositories.ProductRepository
 
         public async Task<List<ResultProductProductWithCategoryDto>> GetProductByDealOfTheDayTrueWithCategory()
         {
-            string query = "Select ProductID,ProductTitle,ProductCity,ProductDistrict,CategoryName,ProductCoverImage,Type,ProductAddress,DealOfTheDay From Product inner join Category on Product.ProductCategory=Category.CategoryID where DealOfTheDay=1";
+            string query = "Select ProductID,ProductTitle,ProductCity,ProductDistrict,CategoryName,ProductCoverImage,ProductPrice,Type,ProductAddress,DealOfTheDay From Product inner join Category on Product.ProductCategory=Category.CategoryID where DealOfTheDay=1";
             using (var connection = _context.CreateConnection())
             {
                 var values = await connection.QueryAsync<ResultProductProductWithCategoryDto>(query);
+                return values.ToList();
+
+            }
+        }
+
+        public async Task<List<ResultLast3ProductWithCategoryDto>> GetLast3ProductAsync()
+        {
+            string query = "Select Top(3) ProductID,ProductTitle,ProductDescription,ProductCity,ProductCoverImage,ProductDistrict,ProductCategory,CategoryName,AdvertisementDate From Product Inner Join Category on Product.ProductCategory=Category.CategoryID  Order By ProductID Desc";
+            using (var connection = _context.CreateConnection())
+            {
+                var values = await connection.QueryAsync<ResultLast3ProductWithCategoryDto>(query);
                 return values.ToList();
 
             }

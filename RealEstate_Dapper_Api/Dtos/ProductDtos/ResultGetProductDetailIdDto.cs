@@ -15,7 +15,8 @@
         public bool ProductStatus { get; set; } 
         public DateTime AdvertisementDate { get; set; }
         public string ProductDescription { get; set; } 
-        public int ProductDetailRoomCount { get; set; }
+        public int ProductDetailRoomCount { get; set; } 
+        public string SlugUrl { get; set; }
 
     }
 }
